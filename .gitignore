@@ -20,3 +20,4 @@ Cargo.lock
 
 data
 ./2021.csv
+.DS_STORE
