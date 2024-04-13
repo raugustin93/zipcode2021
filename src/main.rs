@@ -5,6 +5,7 @@ extern crate serde;
 
 mod zcode;
 use std::{
+    env,
     fs::File,
     io::{self, Write},
 };
@@ -13,15 +14,20 @@ use crate::zcode::{print_report::print_tax_data_report, reader::get_csv_data};
 
 fn main() {
     // Prompt the user for input
-    print!("Enter a five-digit ZIP code: ");
-    io::stdout().flush().unwrap();
+    // print!("Enter a five-digit ZIP code: ");
+    // io::stdout().flush().unwrap();
 
     // Read user input
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
+    // let mut input = String::new();
+    // io::stdin().read_line(&mut input).unwrap();
+    //
+    // // Remove trailing newline character
+    // let zip_code = input.trim();
 
-    // Remove trailing newline character
-    let zip_code = input.trim();
+    // Retrieve command-line arguments
+    let args: Vec<String> = env::args().collect();
+
+    let zip_code = &args[1];
 
     // Validate the ZIP code
     if zip_code.len() != 5 || !zip_code.chars().all(char::is_numeric) {
@@ -29,7 +35,7 @@ fn main() {
         return;
     }
 
-    let zipcode_tax_data = get_csv_data(zip_code);
+    let zipcode_tax_data = get_csv_data(zip_code.as_str());
     if zipcode_tax_data.is_err() {
         println!("Error getting tax data");
     }
