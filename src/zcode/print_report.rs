@@ -31,6 +31,37 @@ fn print_section(tax_data: TaxData) {
             "Size of adjusted gross income        {}",
             agi_stub_description
         ),
+        format!("Number of returns             {}", tax_data.n1),
+        format!("Number of single returns             {}", tax_data.mars1),
+        format!("Number of joint returns             {}", tax_data.mars2),
+        format!(
+            "Number of Head of Household returns             {}",
+            tax_data.mars4
+        ),
+        format!(
+            "Number of electronically filed returns             {}",
+            tax_data.elf
+        ),
+        format!(
+            "Number of computer prepared paper returns             {}",
+            tax_data.cprep
+        ),
+        format!(
+            "Number of returns with paid preparer's signature            {}",
+            tax_data.prep
+        ),
+        format!(
+            "Number of returns with direct deposit           {}",
+            tax_data.dir_dep
+        ),
+        format!("Number of elderly returns             {}", tax_data.elderly),
+        format!("Adjust gross income (AGI)             {}", tax_data.a00100),
+        format!("Total income amount            {}", tax_data.n02650),
+        format!(
+            "Number of returns with salaries and wages             {}",
+            tax_data.n00200
+        ),
+        format!("Salaries and wages amount             {}", tax_data.a00200),
     ];
     println!("\n");
     for description in descriptions {
