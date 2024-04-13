@@ -1,3 +1,3 @@
-mod print_report;
+pub mod print_report;
 mod properties;
 pub mod reader;

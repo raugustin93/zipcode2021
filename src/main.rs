@@ -9,7 +9,7 @@ use std::{
     io::{self, Write},
 };
 
-use crate::zcode::reader::get_csv_data;
+use crate::zcode::{print_report::print_tax_data_report, reader::get_csv_data};
 
 fn main() {
     // Prompt the user for input
@@ -29,12 +29,13 @@ fn main() {
         return;
     }
 
-    let zipcode_tax_data = get_csv_data("30909");
+    let zipcode_tax_data = get_csv_data(zip_code);
     if zipcode_tax_data.is_err() {
         println!("Error getting tax data");
     }
 
-    // if zipcode_tax_data.is_ok() {
-    println!("{:#?}", zipcode_tax_data.unwrap())
-    // }
+    if zipcode_tax_data.is_ok() {
+        let report = print_tax_data_report(zipcode_tax_data.unwrap());
+        println!("{:#?}", report)
+    }
 }

@@ -13,13 +13,13 @@ pub fn get_csv_data(zip_code: &str) -> Result<Vec<TaxData>, Error> {
     let mut contents = String::new();
     file.read_to_string(&mut contents)?;
     let lowercase_contents = contents.to_lowercase();
-    let first_line: Vec<&str> = lowercase_contents.lines().take(1).collect();
-    println!("{:?}", first_line.clone());
     let mut reader = csv::Reader::from_reader(lowercase_contents.as_bytes());
     let mut tax_returns: Vec<TaxData> = vec![];
     for returns in reader.deserialize() {
         let tax_return: TaxData = returns?;
-        tax_returns.push(tax_return);
+        if tax_return.zipcode == zip_code {
+            tax_returns.push(tax_return);
+        }
     }
     Ok(tax_returns)
 }
